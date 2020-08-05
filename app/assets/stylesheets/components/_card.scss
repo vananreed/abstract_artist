@@ -1,5 +1,8 @@
 .card-container {
   padding-top: 25px;
+  a:hover {
+    text-decoration: none;
+  }
   .card {
     margin-bottom: 10px;
     img {
