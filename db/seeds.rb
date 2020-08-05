@@ -1,5 +1,5 @@
-require 'open-uri'
-require 'selenium-webdriver'
+# require 'open-uri'
+# require 'selenium-webdriver'
 
 Artist.destroy_all
 ron = Artist.create!(email: 'ron@abstract.com', password: 'password', first_name: 'Ron', last_name: 'Marko')
