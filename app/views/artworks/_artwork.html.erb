@@ -1,4 +1,4 @@
 <div class="card">
-  <%= cl_image_tag artwork.photo.key, height: 300, width: 400, crop: :fill %>
-  <%= artwork.name %>
+  <%= cl_image_tag artwork.photo.key %>
+  <div class="art-name"><%= artwork.name %></div>
 </div>
