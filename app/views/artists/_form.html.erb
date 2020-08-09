@@ -1,0 +1,7 @@
+<%= simple_form_for @artist do |f| %>
+  <%= f.input :profile_picture, as: :file %>
+  <%= f.input :first_name %>
+  <%= f.input :last_name %>
+  <%= f.input :bio %>
+  <%= f.submit 'Sign up' %>
+<% end %>
