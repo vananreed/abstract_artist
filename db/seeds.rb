@@ -1,10 +1,10 @@
-# require 'open-uri'
+require 'open-uri'
 # require 'selenium-webdriver'
 
 Artist.destroy_all
 ron = Artist.create!(email: 'ron@abstract.com', password: 'password', first_name: 'Ron', last_name: 'Marko')
-
-
+ron.profile_picture.attach(io: URI.open('https://d38we5ntdyxyje.cloudfront.net/957/profile/avatar_medium_square.jpg'), filename: "ron.png", content_type: 'image/png')
+ron.save!
 # driver = Selenium::WebDriver.for :chrome
 # driver.get 'https://www.abstractartist.com/'
 # sleep(10)
@@ -76,8 +76,14 @@ addresses = ['https://static.wixstatic.com/media/2f131b_fdb4821b8a81408ba2f22f56
 addresses.each_with_index do |address, i|
   # address = img.attribute('src')
   # puts address
-  file = URI.open(address)
-  art = ron.artworks.create!(name: 'placeholder')
-  art.photo.attach(io: file, filename: "img#{i}.png", content_type: 'image/png')
-  art.save!
+  begin
+    file = URI.open(address)
+    art = ron.artworks.create!(name: 'placeholder')
+    art.photo.attach(io: file, filename: "img#{i}.png", content_type: 'image/png')
+    art.save!
+  rescue => e
+    Rails.logger.debug "#{e.message}"
+    Rails.logger.debug "Error with: #{address}"
+    art.destroy
+  end
 end
